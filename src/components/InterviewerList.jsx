@@ -12,6 +12,7 @@ export default function InterviewerList(props) {
           return <InterviewerListItem
             {...interviewer}
             selected={interviewer.id === props.interviewer}
+            setInterviewer={event => props.setInterviewer(interviewer.id)}
           />
         })}
       </ul>
