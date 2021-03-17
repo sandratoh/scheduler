@@ -10,6 +10,7 @@ export default function DayList(props) {
         {...day}
         key={day.id}
         selected={day.name === props.day}
+        setDay={props.setDay}
       />
     })}
   </ul>
