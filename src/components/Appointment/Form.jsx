@@ -3,8 +3,8 @@ import Button from 'components/Button'
 import InterviewerList from 'components/InterviewerList'
 
 export default function Form(props) {
-  // const setInterviewer = {event => props.onChange(value.id)}
-  const [name, setName] = useState('')
+  const [name, setName] = useState(props.name || "")
+  const [interviewer, setInterviewer] = useState(props.interviewer || null)
 
   return (
     <main className="appointment__card appointment__card--create">
@@ -14,15 +14,15 @@ export default function Form(props) {
             className="appointment__create-input text--semi-bold"
             type="text"
             placeholder="Enter Student Name"
-            value={props.name}
-            // onChange={event => setName(event.target.value)}
-            /*
-              This must be a controlled component
-            */
+            value={name}
+            onChange={event => setName(event.target.value)}
           />
         </form>
-        {/* <InterviewerList interviewers={props.interviewers} value={interviewer} onChange={setInterviewer} /> */}
-        <InterviewerList interviewers={props.interviewers} value={props.interviewer} onChange={'setInterviewer'} />
+        <InterviewerList
+          interviewers={props.interviewers}
+          value={interviewer}
+          onChange={setInterviewer}
+        />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">

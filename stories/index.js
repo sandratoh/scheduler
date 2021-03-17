@@ -173,11 +173,13 @@ storiesOf("Appointment", module)
       interviewers={interviewers}
       onSave={action("onSave")}
       onCancel={action("onCancel")}
+      onChange={action("onChange")}
     />
   ))
   .add("Edit", () => (
     <Form
       name="Archie Cohen"
+      onChange={action("onChange")}
       interviewers={interviewers}
       interviewer={interviewers[2].id}
       onSave={action("onSave")}
