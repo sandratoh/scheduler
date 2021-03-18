@@ -5,8 +5,8 @@ export default function getAppointmentsForDay(state, day) {
   const daysArr = state.days;
   const appointments = state.appointments;
 
-  daysArr.forEach(dayObj => {
-    dayObj.name === day && appointmentId.push(...dayObj.appointments)
+  daysArr.map(dayObj => {
+    return dayObj.name === day && appointmentId.push(...dayObj.appointments)
   });
 
   for (let key in appointments) { 
