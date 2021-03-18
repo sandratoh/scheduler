@@ -1,4 +1,4 @@
-export function getAppointmentsForDay(state, day) {
+export default function getAppointmentsForDay(state, day) {
   let result = [];
   let appointmentId = [];
 
