@@ -22,12 +22,9 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    console.log('props.id in save', props.id)
-    console.log('interview in save', interview)
 
-    props.bookInterview(props.id, interview);
-
-    transition(SHOW);
+    Promise.resolve(props.bookInterview(props.id, interview))
+    .then(transition(SHOW))
   };
   
   return (

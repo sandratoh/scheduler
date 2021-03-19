@@ -37,10 +37,16 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    setState({
-      ...state,
-      appointments
-    })
+    console.log('interview objecct', {interview})
+    
+    axios
+      .put(`http://localhost:8001/api/appointments/${id}`, {interview})
+      .then(res => {
+        setState({
+          ...state,
+          appointments
+        });
+      })
   }
 
   useEffect(() => {
