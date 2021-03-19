@@ -43,8 +43,7 @@ export default function Application(props) {
           appointments
         });
       })
-      .catch(err => console.log(err))
-  }
+  };
 
   const cancelInterview = id => {
     const appointment = {
@@ -65,7 +64,6 @@ export default function Application(props) {
           appointments
         });
       })
-      .catch(err => console.log(err))
   };
 
   useEffect(() => {
