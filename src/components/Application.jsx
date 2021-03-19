@@ -46,38 +46,26 @@ export default function Application(props) {
       .catch(err => console.log(err))
   }
 
-  const cancelInterview = (id, interview) => {
+  const cancelInterview = id => {
     const appointment = {
       ...state.appointments[id],
       interview: null
     };
-
-    console.log('appointment', appointment);
 
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
 
-    console.log('appointments', appointments)
-    console.log('id', id)
-
-    // axios
-    //   .put(`/api/appointments/${id}`, {interview: null})
-    //   .then(res => {
-    //     setState({
-    //       ...state,
-    //       appointments
-    //     });
-    //     console.log('appointment after promise', appointment)
-    //   })
-    //   .catch(err => console.log(err))
-
-    setState({
-      ...state,
-      appointments
-    })
-
+    axios
+      .delete(`/api/appointments/${id}`, {interview: null})
+      .then(res => {
+        setState({
+          ...state,
+          appointments
+        });
+      })
+      .catch(err => console.log(err))
   };
 
   useEffect(() => {
