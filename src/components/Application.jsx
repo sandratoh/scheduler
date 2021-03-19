@@ -37,14 +37,47 @@ export default function Application(props) {
 
     axios
       .put(`/api/appointments/${id}`, {interview})
-      .then(
+      .then(res => {
         setState({
           ...state,
           appointments
-        })
-      )
+        });
+      })
       .catch(err => console.log(err))
   }
+
+  const cancelInterview = (id, interview) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+
+    console.log('appointment', appointment);
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    console.log('appointments', appointments)
+
+    // // axios
+    // //   .put(`/api/appointments/${id}`, {interview: null})
+    // //   .then(res => {
+    // //     setState({
+    // //       ...state,
+    // //       appointments
+    // //     });
+    // //     console.log('appointment after promise', appointment)
+    // //   })
+    // //   .catch(err => console.log(err))
+
+    setState({
+      ...state,
+      appointments
+    })
+
+  };
 
   useEffect(() => {
     Promise.all([
@@ -93,6 +126,7 @@ export default function Application(props) {
               interview={interview}
               interviewers={dailyInterviewers}
               bookInterview={bookInterview}
+              cancelInterview={cancelInterview}
             />
           )
         })}
