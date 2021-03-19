@@ -44,17 +44,10 @@ export default function Appointment(props) {
       interviewer
     };
 
-    // transition(DELETING);
-
-    // Promise.resolve(props.cancelInterview(props.id, interview))
-    // .then(transition(EMPTY));
-    const deletePromise = new Promise(props.cancelInterview(props.id, interview))
-    
-    // Promise.resolve(props.cancelInterview(props.id, interview))
-    
-    deletePromise.then(transition(EMPTY));
-    
     transition(DELETING);
+
+    Promise.resolve(props.cancelInterview(props.id, interview))
+      .then(transition(EMPTY))
   };
   
   return (
