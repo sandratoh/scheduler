@@ -11,6 +11,7 @@ export default function InterviewerList(props) {
         {props.interviewers.map(value => {
           return <InterviewerListItem
             {...value}
+            key={value.id}
             selected={value.id === props.value}
             setInterviewer={event => props.onChange(value.id)}
           />
