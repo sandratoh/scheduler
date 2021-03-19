@@ -25,9 +25,14 @@ export default function Appointment(props) {
     };
 
     transition(SAVING);
-    
+
     Promise.resolve(props.bookInterview(props.id, interview))
     .then(transition(SHOW))
+
+    // props.bookInterview(props.id, interview)
+    // transition(SHOW)
+
+    // props.bookInterview(props.id, interview) && transition(SHOW)
   };
   
   return (
@@ -47,7 +52,7 @@ export default function Appointment(props) {
           onSave={save}
         />
       )}
-      {mode === SAVING && <Status />}
+      {mode === SAVING && <Status message="Saving..." />}
     </article>
   );
 }
