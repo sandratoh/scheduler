@@ -34,10 +34,6 @@ export default function Appointment(props) {
 
     transition(SAVING);
 
-    // Promise.resolve(props.bookInterview(props.id, interview))
-    // .then(() => transition(SHOW))
-    // .catch(err => transition(ERROR_SAVE, true))
-
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
@@ -52,10 +48,6 @@ export default function Appointment(props) {
 
     transition(DELETING, true);
 
-    // Promise.resolve(props.cancelInterview(props.id, interview))
-    //   .then(() => transition(EMPTY))
-    //   .catch(() => transition(ERROR_DELETE, true))
-
     props
       .cancelInterview(props.id, interview)
       .then(() => transition(EMPTY))
@@ -66,7 +58,7 @@ export default function Appointment(props) {
     <article className="appointment">
       <Header time={props.time}/>
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === SHOW && props.interview && (
+      {mode === SHOW && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer.name}
