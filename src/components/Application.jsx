@@ -60,17 +60,18 @@ export default function Application(props) {
     };
 
     console.log('appointments', appointments)
+    console.log('id', id)
 
-    // // axios
-    // //   .put(`/api/appointments/${id}`, {interview: null})
-    // //   .then(res => {
-    // //     setState({
-    // //       ...state,
-    // //       appointments
-    // //     });
-    // //     console.log('appointment after promise', appointment)
-    // //   })
-    // //   .catch(err => console.log(err))
+    // axios
+    //   .put(`/api/appointments/${id}`, {interview: null})
+    //   .then(res => {
+    //     setState({
+    //       ...state,
+    //       appointments
+    //     });
+    //     console.log('appointment after promise', appointment)
+    //   })
+    //   .catch(err => console.log(err))
 
     setState({
       ...state,
