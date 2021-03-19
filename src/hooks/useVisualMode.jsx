@@ -10,22 +10,13 @@ export default function useVisualMode(initial) {
   };
 
   const back = () => {
-    // setHistory(prev => {
-    //   [...prev];
-    //   // console.log(history)
-    // })
-    // setHistory(prev => [...prev])
-    // history.pop();
-    console.log(history);
-    // setHistory(prev => prev)
-
     const prevHistory = history.slice(-2)[0];
-    console.log('prevHistory', prevHistory)
     setMode(prevHistory);
-    console.log('mode', mode);
-    let historyCopy = [...history];
-    historyCopy.pop();
-    setHistory(historyCopy);
+    
+    setHistory(prev => {
+      const newHistory = [...prev].slice(0, -1);
+      return newHistory;
+    });
   };
 
   return { mode, transition, back };
