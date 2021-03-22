@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { updateSpots } from 'helpers/selectors';
+import { isNewAppointment, updateSpots} from 'helpers/selectors';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -13,6 +13,12 @@ export default function useApplicationData() {
   const setDay = day => setState({ ...state, day });
 
   const bookInterview = (id, interview) => {
+    let days;
+
+    isNewAppointment(state, id)
+      ? days = updateSpots([...state.days], id, -1)
+      : days = state.days;
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -22,8 +28,6 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-
-    const days = updateSpots([...state.days], id, -1)
 
     return axios
       .put(`/api/appointments/${id}`, {interview})

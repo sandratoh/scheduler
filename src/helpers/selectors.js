@@ -58,6 +58,16 @@ export function getInterviewersForDay(state, day) {
   return result;
 };
 
+export function isNewAppointment(state, id) {
+  const appointments = state.appointments;
+  for (let appt in appointments) {
+    if (appointments[appt].id === id && appointments[appt].interview === null) {
+      return true;
+    }
+  }
+  return false;
+}
+
 export function updateSpots(days, id, value) {
   days.forEach(day => {
     if (day.appointments.includes(id)) {
