@@ -19,10 +19,29 @@ function reducer(state, action) {
         interviewers: action.interviewers 
       };
     case SET_INTERVIEW:
+      const { id, interview } = action;
+
+      let days;
+      
+      isNewAppointment(state, id)
+      ? days = updateSpots([...state.days], id, -1)
+      : days = [...state.days];
+      
+      console.log(days)
+      const appointment = {
+        ...state.appointments[id],
+        interview: { ...interview }
+      };
+
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+
       return {
         ...state,
-        appointments: actions.appointments,
-        days: action.days
+        appointments,
+        days
       }
     default:
       throw new Error(
@@ -44,29 +63,14 @@ export default function useApplicationData() {
   const setDay = day => dispatch({type: SET_DAY, day});
 
   const bookInterview = (id, interview) => {
-    let days;
-
-    isNewAppointment(state, id)
-      ? days = updateSpots([...state.days], id, -1)
-      : days = state.days;
-
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
 
     return axios
       .put(`/api/appointments/${id}`, {interview})
       .then(res => {
         dispatch({
           type: SET_INTERVIEW,
-          appointments,
-          days
+          id,
+          interview,
         });
       })
   };
@@ -92,11 +96,6 @@ export default function useApplicationData() {
           appointments,
           days
         })
-        // setState({
-        //   ...state,
-        //   appointments,
-        //   days
-        // });
       })
   };
 
