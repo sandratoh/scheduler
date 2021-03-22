@@ -1,7 +1,6 @@
 import { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import { isNewAppointment, updateSpots } from 'helpers/selectors';
-import { actions } from '@storybook/addon-actions';
 
 const SET_DAY = "SET_DAY";
 const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
@@ -63,7 +62,6 @@ export default function useApplicationData() {
   const setDay = day => dispatch({type: SET_DAY, day});
 
   const bookInterview = (id, interview) => {
-
     return axios
       .put(`/api/appointments/${id}`, {interview})
       .then(res => {
@@ -76,16 +74,6 @@ export default function useApplicationData() {
   };
 
   const cancelInterview = id => {
-    const appointment = {
-      ...state.appointments[id],
-      interview: null
-    };
-
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-
     const days = updateSpots([...state.days], id, 1)
 
     return axios
@@ -93,7 +81,8 @@ export default function useApplicationData() {
       .then(res => {
         dispatch({
           type: SET_INTERVIEW,
-          appointments,
+          id,
+          interview: null,
           days
         })
       })
