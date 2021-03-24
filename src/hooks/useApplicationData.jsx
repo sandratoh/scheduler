@@ -1,6 +1,38 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { isNewAppointment, updateSpots} from 'helpers/selectors';
+// import { countSpot, updateSpots } from 'helpers/updateSpots';
+
+// spot counter function
+const countSpots = (day, appointments) => {
+  let counter = 0;
+  // loop through the weekday's appointment id array
+  day.appointments.forEach(id => {
+    const appointment = appointments[id];
+    if (appointment.interview === null) {
+      counter ++;
+    }
+  })
+  return counter;
+}
+
+// Counts appointments for day that have null interview
+const updateSpots = function (day, days, appointments) {
+  // select day
+  const dayCopy = days.find(elem => elem.name === day)
+
+  // spots available for that day
+  const availableSpots = countSpots(dayCopy, appointments);
+  // update spot state with map to not alter original state
+  const result = days.map(elem => {
+    if (elem.name === day) {
+      return {...elem, spots: availableSpots };
+    }
+    return elem;
+  })
+
+  return result;
+};
+
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -13,11 +45,15 @@ export default function useApplicationData() {
   const setDay = day => setState({ ...state, day });
 
   const bookInterview = (id, interview) => {
-    let days;
+    // let days;
 
-    isNewAppointment(state, id)
-      ? days = updateSpots([...state.days], id, -1)
-      : days = state.days;
+    // isNewAppointment(state, id)
+    //   ? days = updateSpots([...state.days], id, -1)
+    //   : days = state.days;
+
+    
+
+    const days = updateSpots(state.day, state.days, state.appointments)
 
     const appointment = {
       ...state.appointments[id],
@@ -51,7 +87,7 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    const days = updateSpots([...state.days], id, 1)
+    const days = updateSpots(state.day, state.days, state.appointments)
 
     return axios
       .delete(`/api/appointments/${id}`)
