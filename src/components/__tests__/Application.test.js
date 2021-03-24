@@ -108,32 +108,44 @@ describe("Application", () => {
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
     // 3. Find first available appointment
+    const appointments = getAllByTestId(container, "appointment");
+    const appointment = appointments[0];
 
-    
+    fireEvent.click(getByAltText(appointment, "Add"));
+
     // 4. Enter appointment detail
-
-
+    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+      target: { value: "Lydia Miller-Jones" }
+    });
+    
+    fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
+    
     // 5. Click on "Save" button
-
+    fireEvent.click(getByText(appointment, "Save"));
 
     // 6. Expect "Saving..." component to display
-
+    expect(getByText(appointment, "Saving...")).toBeInTheDocument();
 
     // 7. Expect error message to show up.
-
+    await waitForElement(() => getByText(appointment, "Error"));
+    expect(getByText(appointment, "Could not save appointment")).toBeInTheDocument();
 
     // 8. Click on close button
+    fireEvent.click(getByAltText(appointment, "Close"));
 
-
-    // 9. Expect to go back to previous page with empty form
-
+    // 9. Expect to go back to previous page with filled form
+    expect(getByText(appointment, "Cancel") && getByText(appointment, "Save")).toBeInTheDocument();
 
     // 10. Check that the DayListItem with the text "Monday" also has the text "1 spot remaining".
+    const day = getAllByTestId(container, "day")
+      .find(day => queryByText(day, "Monday"));
+    
+    expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
 
     debug();
   });
 
-  it("shows the delete error when failing to delete an appointment", async () => {
+  xit("shows the delete error when failing to delete an appointment", async () => {
     axios.delete.mockRejectedValueOnce();
 
     // 1. Render the Application.
