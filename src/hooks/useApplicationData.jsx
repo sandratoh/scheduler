@@ -18,14 +18,16 @@ const countSpots = (day, appointments) => {
 // Counts appointments for day that have null interview
 const updateSpots = function (day, days, appointments) {
   // select day
-  const dayCopy = days.find(elem => elem.name === day)
+  const dayCopy = days.find(elem => elem.name === day);
 
   // spots available for that day
-  const availableSpots = countSpots(dayCopy, appointments);
+  const spots = countSpots(dayCopy, appointments);
+
+  console.log('spots', spots)
   // update spot state with map to not alter original state
   const result = days.map(elem => {
     if (elem.name === day) {
-      return {...elem, spots: availableSpots };
+      return {...elem, spots };
     }
     return elem;
   })
@@ -45,25 +47,17 @@ export default function useApplicationData() {
   const setDay = day => setState({ ...state, day });
 
   const bookInterview = (id, interview) => {
-    // let days;
-
-    // isNewAppointment(state, id)
-    //   ? days = updateSpots([...state.days], id, -1)
-    //   : days = state.days;
-
-    
-
-    const days = updateSpots(state.day, state.days, state.appointments)
-
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
-
+    
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
+    
+    const days = updateSpots(state.day, state.days, appointments);
 
     return axios
       .put(`/api/appointments/${id}`, {interview})
@@ -87,7 +81,7 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    const days = updateSpots(state.day, state.days, state.appointments)
+    const days = updateSpots(state.day, state.days, appointments)
 
     return axios
       .delete(`/api/appointments/${id}`)
