@@ -22,7 +22,7 @@ function reducer(state, action) {
 
       const appointment = {
         ...state.appointments[id],
-        interview: {...interview}
+        interview
       };
 
       const appointments = {
