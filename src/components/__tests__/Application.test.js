@@ -14,7 +14,7 @@ describe("Application", () => {
     return waitForElement(() => getByText("Monday")).then(() => {
       fireEvent.click(getByText("Tuesday"));
       expect(getByText("Leopold Silvers")).toBeInTheDocument();
-    })
+    });
   });
 
   it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
@@ -163,5 +163,4 @@ describe("Application", () => {
     
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   });
-
-})
+});
