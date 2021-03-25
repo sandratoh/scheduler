@@ -4,7 +4,7 @@ import reducer, {
   SET_DAY,
   SET_APPLICATION_DATA,
   SET_INTERVIEW
-} from "reducers/application";
+} from 'reducers/application';
 
 export default function useApplicationData() {
   const initialState = {
@@ -42,6 +42,7 @@ export default function useApplicationData() {
       })
   };
 
+  // Render server data
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),
@@ -63,21 +64,16 @@ export default function useApplicationData() {
 
     // sending message
     socket.onopen = () => {
-      socket.send("ping");
+      socket.send('ping');
     };
 
     // receiving data and dispatching action
     socket.onmessage = event => {
-      // parse data object
-      const data = JSON.parse(event.data)
-      console.log(data);
+      const data = JSON.parse(event.data);
 
-      if (data.type === "SET_INTERVIEW") {
-        dispatch(data)
-      }
+      data.type === 'SET_INTERVIEW' && dispatch(data);
     };
     
-    // clean up fn
     return () => socket.close();
 
   }, [dispatch]);
