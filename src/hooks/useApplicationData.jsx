@@ -57,5 +57,30 @@ export default function useApplicationData() {
     });
   }, []);
 
+  // WebSocket server connection
+  useEffect(() => {
+    const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+
+    // sending message
+    socket.onopen = () => {
+      socket.send("ping");
+    };
+
+    // receiving data and dispatching action
+    socket.onmessage = event => {
+      // parse data object
+      const data = JSON.parse(event.data)
+      console.log(data);
+
+      if (data.type === "SET_INTERVIEW") {
+        dispatch(data)
+      }
+    };
+    
+    // clean up fn
+    return () => socket.close();
+
+  }, [dispatch]);
+
   return { state, setDay, bookInterview, cancelInterview };
 };
