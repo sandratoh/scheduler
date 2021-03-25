@@ -8,19 +8,19 @@ Visit live application here: [Interview Scheduler](https://605c2355f78cc235b2029
 
 ### Intuitive and Functional Design
 
-**Home Page**
+#### **Home Page**
 ![Scheduler - Home Page](https://github.com/sandratoh/scheduler/blob/master/docs/scheduler-default.png)
 
-**Book Interview**
+#### **Book Interview**
 ![Scheduler - Book Interview](https://github.com/sandratoh/scheduler/blob/master/docs/scheduler-book.png)
 
 ### Mobile-Friendly
 
-**Edit Interview**
-![Scheduler - Edit Interview (mobile)](https://github.com/sandratoh/scheduler/blob/master/docs/scheduler-edit-mobile.png)
+#### **Edit Interview**
+<img src="https://github.com/sandratoh/scheduler/blob/master/docs/scheduler-edit-mobile.png" alt="Scheduler - Edit Interview (mobile)" height="800" width=auto>
 
-**Cancel Confirmation**
-![Scheduler - Cancel Confirmation (mobile)](https://github.com/sandratoh/scheduler/blob/master/docs/scheduler-delete-mobile.png)
+#### **Cancel Confirmation**
+<img src="https://github.com/sandratoh/scheduler/blob/master/docs/scheduler-delete-mobile.png" alt="Scheduler - Cancel Confirmation (mobile)" height="800" width=auto>
 
 ## Features
 
