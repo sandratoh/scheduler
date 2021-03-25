@@ -11,7 +11,7 @@ export function getAppointmentsForDay(state, day) {
 
   for (let key in appointments) { 
     appointmentId.includes(appointments[key].id) && result.push(appointments[key])
-  }
+  };
 
   return result;
 };
@@ -31,10 +31,10 @@ export function getInterview(state, interview) {
         result = {
           ...interview,
           interviewer: {...interviewers[interviewer]}
-        }
+        };
 
       }
-    }
+    };
     
     return result;
   }
@@ -48,12 +48,12 @@ export function getInterviewersForDay(state, day) {
   const interviewers = state.interviewers;
 
   daysArr.map(dayObj => {
-    return dayObj.name === day && interviewerId.push(...dayObj.interviewers)
+    return dayObj.name === day && interviewerId.push(...dayObj.interviewers);
   });
 
   for (let key in interviewers) { 
-    interviewerId.includes(interviewers[key].id) && result.push(interviewers[key])
-  }
+    interviewerId.includes(interviewers[key].id) && result.push(interviewers[key]);
+  };
 
   return result;
 };

@@ -7,7 +7,7 @@ import Appointment from "components/Appointment/index";
 
 // Helpers & Custom Hooks
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
-import useApplicationData from "hooks/useApplicationData"
+import useApplicationData from "hooks/useApplicationData";
 
 // Style sheets
 import "components/Application.scss";
@@ -66,4 +66,4 @@ export default function Application(props) {
       </section>
     </main>
   );
-}
+};
